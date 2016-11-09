@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 class DummyController < ActionController::Base
-  def self.before_filter(options, &block)
+  def self.before_action(options, &block)
     yield self.new
   end
   include Loaf::ControllerExtensions
@@ -21,10 +21,10 @@ RSpec.describe Loaf::ControllerExtensions do
   end
 
   context 'class methods' do
-    it 'invokes before_filter' do
-      allow(DummyController).to receive(:before_filter)
+    it 'invokes before_action' do
+      allow(DummyController).to receive(:before_action)
       DummyController.breadcrumb('name', 'url_path')
-      expect(DummyController).to have_received(:before_filter)
+      expect(DummyController).to have_received(:before_action)
     end
 
     it 'delegates to instance' do

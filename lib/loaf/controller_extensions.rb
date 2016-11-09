@@ -19,7 +19,7 @@ module Loaf
       # @api public
       def breadcrumb(name, url, options = {})
         normalizer = method(:_normalize_name)
-        before_filter(options) do |instance|
+        before_action(options) do |instance|
           normalized_name = normalizer.call(name, instance)
           normalized_url  = normalizer.call(url, instance)
           instance.send(:breadcrumb, normalized_name, normalized_url, options)
